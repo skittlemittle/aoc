@@ -22,9 +22,9 @@ fun main(args: Array<String>) {
 
     // count up all indirect orbits
     for (planet in planets) {
-        var currentPair = orbitMap.find { it.split(")")[1] == planet }
-        println("currentPair $currentPair")
-        var indOrbits: Int? = currentPair?.let { countIndOrbits(it, 0, orbitMap) }
+        var curPair = orbitMap.find { it.split(")")[1] == planet }
+        println("curPair $curPair")
+        var indOrbits: Int? = curPair?.let { countIndOrbits(it, 0, orbitMap) }
         println("orbits $indOrbits")
         if (indOrbits != null) indirectCount += indOrbits
     }
@@ -33,6 +33,7 @@ fun main(args: Array<String>) {
     println("direct orbits $directCount")
     println("total orbit count ${indirectCount + directCount}")
 }
+
 
 // count up the how many things a given planet indirectly orbits, how many steps till COM
 fun countIndOrbits(orbit: String, count: Int, orbitMap: List<String>): Int {
