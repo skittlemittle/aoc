@@ -1,24 +1,32 @@
-package random
-
 import java.io.File
 
+// oh noooooo globals!!!
+val orbitMap = mutableListOf<String>()
+var planets = listOf<String>()
+
 fun main(args: Array<String>) {
-    var directCount: Int = 0
-    var indirectCount: Int = 0
-    val orbitMap = mutableListOf<String>()
     var things = mutableListOf<String>()
 
-    // count up all the lines in the file, thats the number of direct orbits
+    // prep up the inputs
     File("inputs/day6.txt").forEachLine {
         orbitMap.add(it)
         var parts = it.split(")")
         things.add(parts[0])
         things.add(parts[1])
-        directCount ++
     }
 
     // get all planets, bruh moment
-    var planets = things.distinct()
+    planets = things.distinct()
+
+    one()
+    two()
+}
+
+
+fun one() {
+    // count up direct orbits
+    var directCount: Int = orbitMap.count()
+    var indirectCount: Int = 0
 
     // count up all indirect orbits
     for (planet in planets) {
@@ -35,7 +43,13 @@ fun main(args: Array<String>) {
 }
 
 
-// count up the how many things a given planet indirectly orbits, how many steps till COM
+// count the number of orbit transfers from you to santa
+fun two() {
+    
+}
+
+
+// count up how many steps it takes to go from a given planet to COM
 fun countIndOrbits(orbit: String, count: Int, orbitMap: List<String>): Int {
     var orbitPair = orbit.split(")")
     var steps = count

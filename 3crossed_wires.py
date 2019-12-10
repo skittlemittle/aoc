@@ -81,7 +81,7 @@ def find_intersection(p0, p1, p2, p3):
     return [p0[0] + (t * s10_x), p0[1] + (t * s10_y)]
 
 
-if __name__ == "__main__":
+def main():
     home = [0, 0]
 
     data = open('inputs/day3.txt', 'r').readlines()
@@ -108,3 +108,8 @@ if __name__ == "__main__":
         distances.append(abs(distance))
 
     print(min(distances))
+
+
+
+if __name__ == "__main__":
+    main()

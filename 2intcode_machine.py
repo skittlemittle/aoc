@@ -32,14 +32,16 @@ def run_line(workArr, writeArr):
 
     return writeArr
 
+
 # the inputs "noun" and "verb" are input[1] and input[2] and the "result" is input[0]
 # noun and verb can be anything from 0 to 99 inclusive.
 # find the noun and verb that produces the result: 19690720
 # what then is 100 * noun + verb
-if __name__ == "__main__":
 
-    data = open('inputs/day2.txt', 'r').readlines()
-    problem = data[0].strip().split(',')
+
+def main():
+    data = open("inputs/day2.txt", "r").readlines()
+    problem = data[0].strip().split(",")
     for i, val in enumerate(problem):
         problem[i] = int(problem[i])
 
@@ -75,4 +77,7 @@ if __name__ == "__main__":
                         break
                     elif out[0] == "stop":
                         break
-                    
+
+
+if __name__ == "__main__":
+    main()

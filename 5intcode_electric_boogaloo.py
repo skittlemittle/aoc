@@ -40,7 +40,7 @@ def look(tape, opPointer, opArgs):
 
 def jmpt(tape, opPointer, opArgs):
     operands = getOperands(tape, opPointer, opArgs)
-    
+
     if operands[0] != 0:
         opPointer = operands[1]
     else:
@@ -51,7 +51,7 @@ def jmpt(tape, opPointer, opArgs):
 
 def jmpf(tape, opPointer, opArgs):
     operands = getOperands(tape, opPointer, opArgs)
-    
+
     if operands[0] == 0:
         opPointer = operands[1]
     else:
@@ -62,7 +62,7 @@ def jmpf(tape, opPointer, opArgs):
 
 def lss(tape, opPointer, opArgs):
     operands = getOperands(tape, opPointer, opArgs)
-    
+
     if operands[0] < operands[1]:
         tape[tape[opPointer + 3]] = 1
     else:

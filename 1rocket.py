@@ -13,6 +13,7 @@ def one(input):
 
     print(result)
 
+
 def two(input):
     # now add the fuel needed for the module to the module mass and calc the new fuel req
     # keep going till you hit 0 fuel req the dividing will ensure that
@@ -20,7 +21,7 @@ def two(input):
     output = []
 
     for i, val in enumerate(input):
-        totalFuel = math.floor(input[i] / 3) - 2 # get init fuel req
+        totalFuel = math.floor(input[i] / 3) - 2  # get init fuel req
         # then get the fuel req for the fuel req for the fuel req ...
         currentFuel = totalFuel
         while currentFuel > 0:
@@ -34,12 +35,18 @@ def two(input):
     print("lmao")
     print(sum(output))
 
-if __name__ == "__main__":
+
+def main():
     input = []
-    data = open('inputs/day1.txt', 'r').readlines()
+    data = open("inputs/day1.txt", "r").readlines()
     for i in data:
-        val = (i.strip().split('\n'))
+        val = i.strip().split("\n")
         input.append(int(val[0]))
 
     one(input)
     two(input)
+
+
+if __name__ == "__main__":
+    main()
+
