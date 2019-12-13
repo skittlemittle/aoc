@@ -75,8 +75,7 @@ fun two() {
 
     if (commonNode != null) {
         commonNode = commonNode.split(")")[0] // the first part is the common
-
-    // count the path distance from you and santa to the common node, respeccccctively
+        // count the path distance from you and santa to the common node, respeccccctively
         for (jump in santasPath) {
             if (jump.split(")")[0] == commonNode) {
                 santaLen = santasPath.slice(0..santasPath.indexOf(jump)).count() - 1
