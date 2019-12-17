@@ -1,5 +1,4 @@
 # advent of code 2019 day 8: https://adventofcode.com/2019/day/8
-# part 1
 
 import numpy as np
 from collections import Counter
