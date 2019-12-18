@@ -5,7 +5,11 @@
 def add(tape, opPointer, opArgs, relBase):
     operands = getOperands(tape, opPointer, opArgs, relBase)
     out = operands[0] + operands[1]
-    tape[tape[opPointer + 3]] = out
+
+    if opArgs[2] == 2:
+        tape[tape[opPointer + 3] + relBase] = out
+    else:
+        tape[tape[opPointer + 3]] = out
 
     opPointer += 4
     return tape, opPointer
@@ -14,7 +18,11 @@ def add(tape, opPointer, opArgs, relBase):
 def multiply(tape, opPointer, opArgs, relBase):
     operands = getOperands(tape, opPointer, opArgs, relBase)
     out = operands[0] * operands[1]
-    tape[tape[opPointer + 3]] = out
+
+    if opArgs[2] == 2:
+        tape[tape[opPointer + 3] + relBase] = out
+    else:
+        tape[tape[opPointer + 3]] = out
 
     opPointer += 4
     return tape, opPointer
@@ -35,6 +43,8 @@ def put(tape, opPointer, opArgs, relBase):
 def look(tape, opPointer, opArgs, relBase):
     if opArgs[0] == 1:
         print(tape[opPointer + 1])
+    elif opArgs[0] == 2:
+        print(tape[tape[opPointer + 1] + relBase])
     else:
         print(tape[tape[opPointer + 1]])
 
@@ -66,11 +76,17 @@ def jmpf(tape, opPointer, opArgs, relBase):
 
 def less(tape, opPointer, opArgs, relBase):
     operands = getOperands(tape, opPointer, opArgs, relBase)
+    saveAddress = None
+
+    if opArgs[2] == 2:
+        saveAddress = tape[opPointer + 3] + relBase
+    else:
+        saveAddress = tape[opPointer + 3]
 
     if operands[0] < operands[1]:
-        tape[tape[opPointer + 3]] = 1
+        tape[saveAddress] = 1
     else:
-        tape[tape[opPointer + 3]] = 0
+        tape[saveAddress] = 0
 
     opPointer += 4
     return tape, opPointer
@@ -79,10 +95,15 @@ def less(tape, opPointer, opArgs, relBase):
 def equal(tape, opPointer, opArgs, relBase):
     operands = getOperands(tape, opPointer, opArgs, relBase)
 
-    if operands[0] == operands[1]:
-        tape[tape[opPointer + 3]] = 1
+    if opArgs[2] == 2:
+        saveAddress = tape[opPointer + 3] + relBase
     else:
-        tape[tape[opPointer + 3]] = 0
+        saveAddress = tape[opPointer + 3]
+
+    if operands[0] == operands[1]:
+        tape[saveAddress] = 1
+    else:
+        tape[saveAddress] = 0
 
     opPointer += 4
     return tape, opPointer
@@ -141,13 +162,13 @@ def main():
         operation = [0] * (2 - len(operation)) + operation
         op = state["tape"][opPointer]
 
-        opArgs = [0, 0, 0]
+        opArgs = [0] * 3
         if len(operation) > 2:
             op = int(str(operation[-2]) + str(operation[-1]))
             opArgs = operation.copy()
             del opArgs[-2:]
             opArgs.reverse()
-            opArgs = opArgs + [0] * (2 - len(opArgs))
+            opArgs = opArgs + [0] * (3 - len(opArgs))
 
         # lmao yeet
         if op == 9:
