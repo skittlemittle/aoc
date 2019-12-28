@@ -21,7 +21,6 @@ fun main(args: Array<String>) {
     // get all planets, bruh moment
     planets = things.distinct()
 
-    // comment out the one you want to run
     one()
     two()
 }
