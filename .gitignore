@@ -3,5 +3,6 @@
 
 # bins
 *.jar
+a.out
 
 test.txt
