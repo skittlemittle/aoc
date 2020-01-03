@@ -14,10 +14,12 @@ int *intdup(int const *src, size_t len)
 
 int abssum(int *array)
 {
-    int sum;
+    int sum = 0;
     for (size_t i = 0; i < sizeof array / sizeof array[0] + 1; i++) {
-        sum += abs(*(array + i));
+        printf("b %i ", array[i]);
+        sum += abs(array[i]);
     }
+    printf("\n");
     return sum;
 }
 
@@ -46,7 +48,7 @@ int main(int argc, char const *argv[])
 {
     int arrsize = 3;
     int mooncount = 4;
-    int moonenergy;
+    int moonenergy = 0;
 
     // init positions of Io, Europa, Ganymede, and Callisto (x y z)
     int moons[4][3] = {{14, 2, 8},
@@ -59,7 +61,7 @@ int main(int argc, char const *argv[])
                       {0, 0, 0},
                       {0, 0, 0}};
 
-    // run the sim for a thousand steps
+    // run the sim for a thousand steps //
     for (size_t i = 0; i < 1000; i++) {
         // go over all pairs of moons and apply gravity
         for (size_t i = 0; i < mooncount - 1; i++) {
@@ -73,16 +75,16 @@ int main(int argc, char const *argv[])
 
         // apply velocity, update moon positions
         for (size_t i = 0; i < mooncount; i++) {
-            int *vel;
-            vel = intdup(vels[i], arrsize);
+            int *vel = intdup(vels[i], arrsize);
             calcpos(vel, moons[i], arrsize);
             printf("pos %i\n", moons[i][0]);
             printf("velocity %i\n", vels[i][0]);
         }
     }
 
+    // part one: total energy in system
     for (size_t i = 0; i < mooncount; i++) {
-        moonenergy += abssum(vels[i]) * abssum(moons[i]);
+        moonenergy += (abssum(vels[i]) * abssum(moons[i]));
     }
 
     printf("total energy of the system: %i\n", moonenergy);
