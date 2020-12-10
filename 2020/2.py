@@ -32,7 +32,7 @@ def two(inputs):
 def main():
     inputs = []
 
-    with open("inputs/2.txt", "r") as f:
+    with open("./inputs/2.txt", "r") as f:
         data = f.readlines()
         for i in data:
             d_n = re.search(r"\d+-\d+", i)
