@@ -1,18 +1,22 @@
 ACCUMULATOR = 0
 
+
 def acc(tape, op_pointer, args):
     global ACCUMULATOR
     ACCUMULATOR += int(args)
     op_pointer += 1
     return tape, op_pointer
 
+
 def jmp(tape, op_pointer, args):
     op_pointer += int(args)
     return tape, op_pointer
 
+
 def nop(tape, op_pointer, args):
     op_pointer += 1
     return tape, op_pointer
+
 
 def main():
     data = list(map(lambda x: x.strip("\n"), open("./inputs/8.txt", "r").readlines()))
@@ -49,6 +53,6 @@ def main():
                 # print(ACCUMULATOR)
                 break
 
+
 if __name__ == "__main__":
     main()
-

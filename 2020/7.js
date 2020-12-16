@@ -7,8 +7,8 @@ const validBags = new Set();
 function one(search) {
   const bagMatch = new RegExp(`(\\d) ${search}`);
 
-  input.forEach(bag => {
-    if(bag.match(bagMatch)) {
+  input.forEach((bag) => {
+    if (bag.match(bagMatch)) {
       const container = bag.split(" ").splice(0, 2).join(" ");
       validBags.add(container);
       one(container);
@@ -16,7 +16,7 @@ function one(search) {
   });
 }
 
-fs.readFile("./inputs/7.txt", "utf8",  (_, data) => {
+fs.readFile("./inputs/7.txt", "utf8", (_, data) => {
   input = [...data.split("\n")];
   input.splice(-1, 1);
   one("shiny gold");

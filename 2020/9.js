@@ -7,11 +7,10 @@ function isSumOf(n, set) {
   for (const i of set) {
     if (r) break;
     for (const j of set) {
-      if (((i + j) === n) && (i !== j))
-        r = true;
+      if (i + j === n && i !== j) r = true;
     }
   }
-    return r;
+  return r;
 }
 
 function one(input) {
@@ -20,8 +19,7 @@ function one(input) {
     if (r) break;
     const n = input[i];
     if (i >= PREAMBLE) {
-      if(!isSumOf(n, input.slice(i - (PREAMBLE), i)))
-        r = n;
+      if (!isSumOf(n, input.slice(i - PREAMBLE, i))) r = n;
     }
   }
   return r;
@@ -31,7 +29,7 @@ function two(input, target) {
   // brute force epicly
   let r = false;
   let size = 2;
-  while(!r) {
+  while (!r) {
     for (let i in input) {
       i *= 1;
       const set = input.slice(i, i + size);
