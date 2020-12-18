@@ -2,32 +2,22 @@
 const fs = require("fs");
 
 // pos = [z, y, x]
-function countActiveNeighbors(pos, space) {
+function countActiveNeighbors([z, y, x], space) {
   let sum = 0;
-  const depth = space.length;
-  const height = space[0].length;
-  const width = space[0][0].length;
   // O(ur mum)
   for (let zo = -1; zo < 2; zo++) {
     for (let yo = -1; yo < 2; yo++) {
       for (let xo = -1; xo < 2; xo++) {
-        // TODO: nae nae
-        const z = pos[0] + zo;
-        const y = pos[1] + yo;
-        const x = pos[2] + xo;
-        if (
-          !(z < 0 || z >= depth || y < 0 || y >= height || x < 0 || x >= width)
-        )
-          sum += space[z][y][x];
+        sum += cubeAt([z + zo, y + yo, x + xo], space);
       }
     }
   }
-  sum -= space[pos[0]][pos[1]][pos[2]];
+  sum -= space[z][y][x];
   return sum;
 }
 
 // if it aint in current space its off
-function cubeAt(z, y, x, space) {
+function cubeAt([z, y, x], space) {
   if (z in space && y in space[0] && x in space[0][0]) return space[z][y][x];
   else return 0;
 }
@@ -38,10 +28,9 @@ function one(input) {
     [...Array(input[0].length + 2)].map((_, y) =>
       new Array(input[0][0].length + 2)
         .fill(0)
-        .map((_, x) => cubeAt(z - 1, y - 1, x - 1, input))
+        .map((_, x) => cubeAt([z - 1, y - 1, x - 1], input))
     )
   );
-  console.log(space);
 
   for (let cycle = 0; cycle < 6; cycle++) {
     console.log("===================================");
@@ -58,7 +47,7 @@ function one(input) {
       for (let y = 0; y < size.y; y++) {
         for (let x = 0; x < size.x; x++) {
           const numActive = countActiveNeighbors([z, y, x], space);
-          const currCube = cubeAt(z, y, x, space);
+          const currCube = cubeAt([z, y, x], space);
 
           if (currCube && [2, 3].find((n) => n === numActive)) {
             next[z][y][x] = 1;
@@ -72,17 +61,17 @@ function one(input) {
     }
 
     for (const d in next) {
-      console.log("+++++");
+      console.log(".");
       for (const f in next[d]) {
         console.log(`${next[d][f]}`);
       }
     }
-    // owo imagine copying like this
+    // owo imagine copying like this, shouldve just used a hashmap lmaoooo
     space = [...Array(size.z + 2)].map((_, z) =>
       [...Array(size.y + 2)].map((_, y) =>
         new Array(size.x + 2)
           .fill(0)
-          .map((_, x) => cubeAt(z - 1, y - 1, x - 1, next))
+          .map((_, x) => cubeAt([z - 1, y - 1, x - 1], next))
       )
     );
   }
