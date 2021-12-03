@@ -1,0 +1,11 @@
+{
+  "name": "owo",
+  "version": "200",
+  "description": "ss",
+  "main": "index.js",
+  "author": "me(me)",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^16.11.11"
+  }
+}
