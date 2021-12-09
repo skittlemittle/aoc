@@ -26,7 +26,6 @@ def make_grid_one(lines):
 
 
 def make_grid_two(lines, grid):
-    # walk lines in pure diagonals, increase both coords each step stop when you hit the smallest endpoint
     for line in lines:
         sX = line[0]
         sY = line[1]
